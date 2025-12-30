@@ -2,7 +2,67 @@
 <odoo>
     <data>
 
-        
+        <!-- Lista de Estoque -->
+        <record id="view_estoque_tree" model="ir.ui.view">
+            <field name="name">estoque.tree</field>
+            <field name="model">estoque</field>
+            <field name="arch" type="xml">
+                <list string="Estoque"> <!-- Tree foi alterado para List nas versões mais recentes do Odoo -->
+                    <field name="produto_id"/>
+                    <field name="quantity"/>
+                    <field name="location"/>
+                    <field name="date"/>
+                    <field name="unity_price"/>
+                    <field name="total_value"/>
+                    <field name="state"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Menu de Cadastro -->
+        <record id="view_estoque_form" model="ir.ui.view">
+            <field name="name">estoque.form</field>
+            <field name="model">estoque</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+
+                        <button name="action_set_available" string="Marcar como Disponível"
+                                invisible="state == 'available'" class="oe_highlight" type="object" />
+
+                        <button name="action_set_out_of_stock" string="Marcar como Fora de Estoque"
+                                invisible="state == 'out_of_stock'" class="oe_highlight" type="object" />
+
+                        <field name="state" widget="statusbar" 
+                               statusbar_visible="available,out_of_stock"
+                        />
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="produto_id"/>
+                            <field name="quantity"/>
+                            <field name="location"/>
+                            <field name="date"/>
+                            <field name="notes"/>
+                            <field name="unity_price"/>
+                            <field name="total_value" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Ação de Janela para Estoque -->
+        <record id="action_estoque" model="ir.actions.act_window">
+            <field name="name">Estoque</field>
+            <field name="res_model">estoque</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="menu_estoque_pd_root"
+                  name="Estoque"
+                  action="action_estoque"
+                  sequence="10"/> 
 
     </data>
 </odoo>
