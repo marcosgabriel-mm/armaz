@@ -6,10 +6,12 @@ class Estoque(models.Model):
     _rec_name = 'produto_id'
 
     produto_id = fields.Many2one(
-        'product.product',
+        'estoque.produto',
         string='Produto',
         required=True,
-        ondelete='cascade'
+        ondelete='restrict',
+        domain=[('active', '=', True)],
+        help='Produto associado ao registro de estoque.',
     )
 
     quantity = fields.Integer(
@@ -17,12 +19,6 @@ class Estoque(models.Model):
         default=0,
         help='Quantidade disponível do produto em estoque.',
         required=True
-    )
-
-    unity_price = fields.Float(
-        string='Preço Unitário',
-        required=True,
-        help='Preço unitário do produto.',
     )
 
     location = fields.Char(
@@ -35,12 +31,6 @@ class Estoque(models.Model):
         string='Data',
         default=fields.Datetime.now,
         help='Data e hora do registro de estoque.',
-    )
-
-    notes = fields.Text(
-        string='Notas',
-        help='Notas adicionais sobre o estoque do produto.',
-        required=False
     )
 
     state = fields.Selection([
@@ -61,11 +51,11 @@ class Estoque(models.Model):
         help='Valor total do estoque baseado na quantidade e preço do produto.',
     )
 
-    @api.depends('quantity', 'unity_price')
+    @api.depends('quantity', 'produto_id.standard_price')
     def _compute_total_value(self):
         for record in self:
-            if record.unity_price:
-                record.total_value = record.quantity * record.unity_price
+            if record.produto_id and record.produto_id.standard_price:
+                record.total_value = record.quantity * record.produto_id.standard_price
             else:
                 record.total_value = 0.0
 

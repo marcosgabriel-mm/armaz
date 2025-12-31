@@ -9,6 +9,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/estoque_view.xml',
+        'views/produto_view.xml',
     ],
     'installable': True,
     'application': True,
