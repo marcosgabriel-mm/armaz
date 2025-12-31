@@ -4,6 +4,11 @@ class Produto(models.Model):
     _name = 'estoque.produto'
     _description = 'Produto do Estoque'    
     _rec_name = 'name'
+    
+    _code_unique = models.Constraint(
+        definition='UNIQUE(code)',
+        message='O código do produto deve ser único.'
+    )
 
     name = fields.Char(
         string='Nome do Produto',
