@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import ValidationError
 
 class Estoque(models.Model):
     _name = 'estoque'
@@ -63,7 +64,7 @@ class Estoque(models.Model):
     def _check_quantity(self):
         for record in self:
             if record.quantity < 0:
-                raise models.ValidationError('A quantidade não pode ser negativa!')
+                raise ValidationError('A quantidade não pode ser negativa!')
     
     def action_set_available(self):
         for record in self:

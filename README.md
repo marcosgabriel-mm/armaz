@@ -7,12 +7,20 @@ Este módulo fornece uma solução para o gerenciamento de estoque e produtos no
 ### 1. Gestão de Produtos (`estoque.produto`)
 Implementação de um cadastro de produtos independente e personalizado, eliminando a necessidade de dependências complexas. O modelo foi desenhado para ser objetivo, incluindo atributos essenciais como **Código**, **Descrição**, **Categoria** e **Preço Padrão**, garantindo um relacionamento direto e otimizado com os registros de estoque.
 
+Uma regra de negócio foi implementada no campo código, impedindo a inserção de dados duplicados e garantindo a unicidade dos registros através de uma constraint SQL.
+
+>**Melhorias possíveis**: Implementar validação em tempo real no frontend para alertar o usuário antes da tentativa de salvamento, melhorando a experiência do usuário e reduzindo requisições desnecessárias ao servidor.
+
 ### 2. Controle de Estoque (`estoque`)
 Sistema simplificado para monitoramento de disponibilidade em tempo real. Através de visualizações intuitivas, é possível acompanhar o status de cada item com facilidade.
 - **Cálculos Automáticos**: O valor total é atualizado instantaneamente (`Quantidade` × `Preço Unitário`).
 - **Indicadores Visuais**:
   - 🟢 **Disponível**: Produtos prontos para movimentação.
   - 🔴 **Fora de Estoque**: Alerta visual para itens indisponíveis.
+
+A quantidade de produtos foi tratada com validação para impedir valores negativos, garantindo a integridade dos dados. O preço total no estoque é calculado automaticamente através de um campo computado (`Quantidade` × `Preço Padrão do Produto`). O sistema também permite alternar o estado de disponibilidade entre 'Disponível' e 'Fora de Estoque', facilitando o controle visual do inventário.
+
+>**Melhorias possíveis**: Implementar um sistema de alertas quando o estoque atingir níveis mínimos configuráveis, adicionar histórico de movimentações para rastreabilidade completa.
 
 ## 📂 Estrutura de Menus
 A navegação foi projetada para ser direta e eficiente, facilitando o acesso às operações diárias:
