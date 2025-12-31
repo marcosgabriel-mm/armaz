@@ -9,12 +9,11 @@
             <field name="arch" type="xml">
                 <list string="Estoque"> <!-- Tree foi alterado para List nas versões mais recentes do Odoo -->
                     <field name="produto_id"/>
-                    <field name="quantity"/>
                     <field name="location"/>
-                    <field name="date"/>
-                    <field name="unity_price"/>
+                    <field name="quantity"/>
                     <field name="total_value"/>
                     <field name="state"/>
+                    <field name="date"/>
                 </list>
             </field>
         </record>
@@ -43,8 +42,6 @@
                             <field name="quantity"/>
                             <field name="location"/>
                             <field name="date"/>
-                            <field name="notes"/>
-                            <field name="unity_price"/>
                             <field name="total_value" readonly="1"/>
                         </group>
                     </sheet>
