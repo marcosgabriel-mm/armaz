@@ -1,4 +1,4 @@
-# 📦 Estoque PD - Gestão de Estoque Simples
+# 📦 Armaz
 
 Este módulo fornece uma solução para o gerenciamento de estoque e produtos no Odoo, permitindo o controle de quantidades, localizações e valores de forma intuitiva e desacoplada do módulo nativo de inventário.
 
